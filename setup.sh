@@ -1,7 +1,7 @@
 #!/bin/bash
 
-for dotfile in gitconfig spacemacs tmux vimrc vim_runtime zshenv zshenv_local zshrc zshrc_local; do
-  ln -s $dotfile $HOME/.$dotfile
+DOTFILES_DIR=$(pwd)
+for dotfile in gitconfig spacemacs zshenv zshenv_local zshrc zshrc_local; do
+  ln -fs $DOTFILES_DIR/$dotfile $HOME/.$dotfile
 done
-
-echo "export PATH=$PATH:$(pwd)/bin" >> $HOME/.zshenv_local
+ln -fs $DOTFILES_DIR/tmux/tmux.conf $HOME/.tmux.conf

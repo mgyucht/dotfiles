@@ -10,7 +10,6 @@ alias pushdevtools='rsync -r ~/devtools awsdev:~'
 
 # For coreutils ls instead of gls
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export GOPATH="/Users/miles/go"
 # To use our bazel-build
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
