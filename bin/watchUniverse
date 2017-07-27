@@ -1,0 +1,2 @@
+syncUniverse
+fswatch -l 1 -or $UNIVERSE_HOME | xargs -n1 -I{} syncUniverse

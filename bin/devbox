@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $1 in
+  describe)
+    aws ec2 describe-instances --instance-ids i-5cc58185;;
+  start)
+    aws ec2 start-instances --instance-ids i-5cc58185;;
+  stop)
+    aws ec2 stop-instances --instance-ids i-5cc58185;;
+  *)
+    echo "$1 is not a valid option, must be one of describe, start, stop";;
+esac

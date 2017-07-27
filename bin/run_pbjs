@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$UNIVERSE_HOME/billing/web/node_modules/protobufjs/bin/pbjs $@ -t js -p $UNIVERSE_HOME/api-base/src/main/protobuf -p $UNIVERSE_HOME/api/src/main/protobuf -p $UNIVERSE_HOME/api-base/target/protobuf_external

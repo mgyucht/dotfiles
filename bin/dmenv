@@ -1,0 +1,4 @@
+# Run by executing `source ~/bin/dmenv`
+
+eval $(docker-machine env $DOCKER_MACHINE)
+export DOCKER_IP=$(docker-machine url $DOCKER_MACHINE)

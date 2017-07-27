@@ -1,0 +1,8 @@
+#!/bin/bash
+CURRENT_IP=$(curl -s icanhazip.com)
+VPN_IP='52.41.115.21'
+if [[ $CURRENT_IP = $VPN_IP ]]; then
+  echo "On VPN"
+else
+  echo "Not on VPN"
+fi

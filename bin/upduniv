@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# merge new changes into master
+GIT_REPO=$(git rev-parse --show-toplevel)
+
+if [[ -n $GIT_REPO ]]; then
+    cd $GIT_REPO
+else
+    cd $UNIVERSE_HOME
+fi
+
+git diff --quiet --ignore-submodules HEAD
+DIRTY=$?
+
+if [[ $DIRTY == "1" ]]; then
+    echo "Working directory is dirty; stashing current progress."
+    git stash
+fi
+
+git checkout master && git pull upstream master && git checkout - && git submodule update
+
+if [[ $DIRTY == "1" ]]; then
+    git stash pop
+fi

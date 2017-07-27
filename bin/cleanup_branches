@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BRANCHES=$(git branch | cut -c 3-100)
+
+for BRANCH in $BRANCHES; do
+  echo "Delete branch $BRANCH?"
+  select RESP in "Yes" "No"; do
+    case $RESP in
+      Yes ) git branch -D $BRANCH; break;;
+      No ) break;;
+    esac
+  done
+done

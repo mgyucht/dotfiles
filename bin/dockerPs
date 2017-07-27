@@ -1,0 +1,13 @@
+#!/bin/bash
+
+FILTERS="--filter status=running --filter status=exited --filter status=restarting --filter status=paused"
+FORMAT="--format 'table {{.ID}}\t{{.Status}}\t{{.Names}}'"
+DOCKER_PS="docker ps -a $FILTERS $FORMAT"
+DOCKER_CREATED_CONTAINERS_COMMAND=$(docker ps -aq --filter status=created)
+
+eval $DOCKER_PS
+if [[ -n $DOCKER_CREATED_CONTAINERS_COMMAND ]]; then
+  echo
+  echo "NOTE: there are created containers"
+  docker ps -a --filter status=created --format 'table {{.ID}}\t{{.Names}}'
+fi

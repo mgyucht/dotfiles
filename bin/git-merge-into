@@ -1,0 +1,9 @@
+#!/bin/bash
+# Merge the current branch into the specified branch
+
+set -e
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+git checkout $1
+git merge $CURRENT_BRANCH
+git checkout $CURRENT_BRANCH

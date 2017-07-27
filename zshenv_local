@@ -1,0 +1,27 @@
+export AWS_HOSTNAME=awsdev
+export AWS_UNIVERSE_DIR=databricks-devel/universe
+export DOCKER_MACHINE=db183
+export DYLD_FALLBACK_LIBRARY_PATH=$HOME/anaconda/lib
+export UNIVERSE_HOME=$HOME/databricks/universe
+export SPARK_HOME=$HOME/databricks/spark
+
+alias dmenv="source $HOME/bin/dmenv"
+alias pushdevtools='rsync -r ~/devtools awsdev:~'
+
+# For coreutils ls instead of gls
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export GOPATH="/Users/miles/go"
+# To use our bazel-build
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+alias ls='gls --color --group-directories-first'
+
+function ssh-jenkins() {
+  ssh -i $HOME/.ssh/jenkins-key.pem -l jenkins $@
+}
+
+function awsvnc() {
+  open vnc://nobody:secret@awsdev:$1
+}
+
+alias cdu2="cd $HOME/databricks/universe2"

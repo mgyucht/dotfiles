@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -n "$(docker ps -aq)" ]; then
+  echo "Removing leftover containers..."
+  docker rm -f $(docker ps -aq)
+fi
+
+if [[ $1 == "--restart-docker" ]]; then
+	echo "Restarting docker-machine..."
+	docker-machine stop db
+	docker-machine start db
+    eval $(docker-machine env db)
+    export DOCKER_IP=$(docker-machine ip db)
+fi

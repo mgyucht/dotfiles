@@ -1,0 +1,20 @@
+#!/bin/bash
+
+BRANCHES="$(git branch --sort=committerdate)"
+
+for BRANCH in $BRANCHES; do
+  read -p "Delete branch $BRANCH? (y/N) " -r yn
+  if [[ $yn =~ ^[Yy]$ ]]; then
+    git branch -d $BRANCH
+    if [[ $? -ne 0 ]]; then
+      read -p "Force delete branch $BRANCH? (y/N) " -r forceyn
+      if [[ $forceyn =~ ^[Yy]$ ]]; then
+        git branch -D $BRANCH
+      else
+        echo "Not deleting branch $BRANCH"
+      fi
+    fi
+  else
+    echo "Not deleting branch $BRANCH"
+  fi
+done
