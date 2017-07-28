@@ -1,16 +1,4 @@
-function moveToDevtools () {
-  mv ~/$1 ~/devtools/$1
-  ln -s ~/devtools/$1 ~/$1
-}
-
-alias setupgo='sudo networksetup -setsearchdomains "Wi-Fi" corp.databricks.com databricks.com'
-
-alias dmstart='source ~/databricks/universe2/eng-tools/docker_machine_start.sh db183'
-alias dmstop='source ~/databricks/universe2/eng-tools/docker_machine_stop.sh db183'
-alias dmrestart='source ~/databricks/universe2/eng-tools/docker_machine_restart.sh db183'
-
-alias syncCerts='rsync -r ~/.kube/certs ubuntu@awsdev:/home/ubuntu/.kube'
+alias syncCerts='rsync -avz -r ~/.kube/certs ubuntu@awsdev:/home/ubuntu/.kube'
 alias syncDevtools='rsync -avz -r ~/devtools/bin ubuntu@awsdev:/home/ubuntu/devtools'
 
-export PATH="$PATH:/Users/miles/databricks/universe/eng-tools/bin"
-export PATH=$PATH:/Users/miles/devtools/bin
+export PATH="$PATH:/Users/miles/bin:/Users/miles/universe/eng-tools/bin:/Users/miles/dotfiles/bin"
