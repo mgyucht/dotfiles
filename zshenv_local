@@ -1,4 +1,4 @@
-export AWS_HOSTNAME=awsdev
+export AWS_HOSTNAME=miles.dev.databricks.com
 export AWS_UNIVERSE_DIR=databricks-devel/universe
 export UNIVERSE_HOME=$HOME/universe
 export SPARK_HOME=$HOME/spark

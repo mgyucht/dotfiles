@@ -8,7 +8,7 @@
 [user]
 	name = Miles Yucht
 	email = miles@databricks.com
-	signingkey = BFB389DE14685FE3
+	signingkey = F43C36E227EDD419
 [push]
 	default = simple
 [alias]
@@ -20,3 +20,5 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+[commit]
+	gpgsign = true

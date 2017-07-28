@@ -1,4 +1,4 @@
-alias syncCerts='rsync -avz -r ~/.kube/certs ubuntu@awsdev:/home/ubuntu/.kube'
-alias syncDevtools='rsync -avz -r ~/devtools/bin ubuntu@awsdev:/home/ubuntu/devtools'
+alias syncCerts='rsync -avz -r ~/.kube/certs ubuntu@miles.dev.databricks.com:/home/ubuntu/.kube'
+alias syncDevtools='rsync -avz -r ~/devtools/bin ubuntu@miles.dev.databricks.com:/home/ubuntu/devtools'
 
 export PATH="$PATH:/Users/miles/bin:/Users/miles/universe/eng-tools/bin:/Users/miles/dotfiles/bin"
