@@ -91,7 +91,9 @@ alias kdaa='kubecfg --context=dev-azure-amsterdam --namespace=develompent'
 alias kdaaa='kubecfg --context=dev-azure-amsterdam --namespace=accounts'
 alias em='emacsclient -t --alternate-editor ""'
 
-source ~/.zshrc_local
+if [[ -e ~/.zshrc_local ]]; then
+  source ~/.zshrc_local
+fi
 stty -ixon
 
 alias sshjenkins='ssh -i ~miles/.ssh/jenkins-key.pem'
