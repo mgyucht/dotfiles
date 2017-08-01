@@ -316,6 +316,9 @@ layers configuration. You are free to put any user code."
             (lambda ()
               (make-local-variable 'js-indent-level)
               (setq js-indent-level 2)))
+
+  ;; Don't ever require autocomplete
+  (setq company-require-match nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

@@ -17,7 +17,7 @@ if [[ $DIRTY == "1" ]]; then
     git stash
 fi
 
-git checkout master && git pull upstream master && git checkout - && git submodule update
+git checkout master && git pull databricks master && git checkout - && git submodule update
 
 if [[ $DIRTY == "1" ]]; then
     git stash pop

@@ -1,8 +1,11 @@
 #!/bin/bash
 CURRENT_IP=$(curl -s icanhazip.com)
 VPN_IP='52.41.115.21'
+OFFICE_IP='199.76.8.162'
 if [[ $CURRENT_IP = $VPN_IP ]]; then
   echo "On VPN"
+elif [[ $CURRENT_IP = $OFFICE_IP ]]; then
+  echo "On Office"
 else
   echo "Not on VPN"
 fi

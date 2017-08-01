@@ -1,0 +1,3 @@
+for program in emacs-mac tmux tree fasd twig wget reattach-to-user-namespace diff-so-fancy tmux-mem-cpu-load ag mosh fswatch gpg pidof python3 awscli jq cfssl jsonnet; do
+    brew install $program
+done

@@ -7,4 +7,4 @@ source $HOME/.zshenv_local
 : "${AWS_UNIVERSE_DIR?Need to set AWS_UNIVERSE_DIR}"
 
 # rsync script which syncs the universe
-rsync -avzrl --delete -e 'ssh -o ControlPath="/tmp/%C"' --filter=':- .gitignore' --exclude '*/target/*' --exclude 'spark/1.*' --exclude 'spark/master' --exclude '.git/index.lock' --exclude 'port_database.db' --exclude '.ensime_cache' --exclude '.tern-port' --exclude 'bazel-testlogs' --exclude 'testlogs' --progress $UNIVERSE_HOME/. ubuntu@$AWS_HOSTNAME:$AWS_UNIVERSE_DIR
+rsync -avzrl --delete -e 'ssh -o ControlPath="/tmp/%C"' --filter=':- .gitignore' --exclude '*/target/*' --exclude '.git/index.lock' --exclude 'port_database.db' --exclude '.ensime_cache' --exclude '.tern-port' --exclude 'bazel-testlogs' --exclude 'testlogs' --progress $UNIVERSE_HOME/. ubuntu@$AWS_HOSTNAME:$AWS_UNIVERSE_DIR
