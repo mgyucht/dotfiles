@@ -29,6 +29,7 @@ function setup_virtualenv() {
 
 alias cdu="cd $UNIVERSE_HOME"
 alias cds="cd $SPARK_HOME"
+alias cdd="cd $HOME/dotfiles"
 alias tmuxcopy="tmux list-buffers | head -n1 | sed 's/^\([^:]*\).*/\1/' | xargs tmux show-buffer -b | pbcopy"
 
 unalias gcm &> /dev/null
