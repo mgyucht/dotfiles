@@ -385,6 +385,9 @@ layers configuration. You are free to put any user code."
 
   ;; Don't ever require autocomplete
   (setq company-require-match nil)
+
+  ;; kill frame on SPC q q
+  (evil-leader/set-key "q q" 'spacemacs/frame-killer)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
