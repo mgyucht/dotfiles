@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Checks if there's a frame open
-NUM_FRAMES=$(emacsclient -n -e "(length (frame-list))")
-if [ $NUM_FRAMES == "1" ]; then
+NUM_FRAMES=$(emacsclient -n -e "(length (frame-list))" 2> /dev/null)
+if [[ $? != 0 || $NUM_FRAMES == "1" ]]; then
   emacsclient -a '' -c "$@"
 else
   emacsclient -c "$@"

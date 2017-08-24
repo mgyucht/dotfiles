@@ -7,7 +7,8 @@ plugins=(git ssh-agent)
 source $ZSH/oh-my-zsh.sh
 
 DEFAULT_USER=$(whoami)
-export EDITOR=vim
+export VISUAL=em
+export EDITOR=$VISUAL
 export GPG_TTY=$(tty)
 
 # get fasd cranking
@@ -47,6 +48,7 @@ alias gdm='git diff $(git merge-base HEAD master)'
 alias gdr='git diff $(git rev-parse --abbrev-ref --symbolic-full-name @{u})'
 alias gdp='git diff HEAD~'
 alias gpc='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpd='git push -u databricks $(git rev-parse --abbrev-ref HEAD)'
 
 gdb () {
   git diff $(git merge-base HEAD $1) $@
@@ -90,6 +92,12 @@ alias kdae='kubecfg --context=dev-azure-eastus --namespace=development'
 alias kdaea='kubecfg --context=dev-azure-eastus --namespace=accounts'
 alias kdaa='kubecfg --context=dev-azure-amsterdam --namespace=develompent'
 alias kdaaa='kubecfg --context=dev-azure-amsterdam --namespace=accounts'
+alias ksaw='kubecfg --context=staging-azure-westus --namespace=development'
+alias ksawa='kubecfg --context=staging-azure-westus --namespace=accounts'
+alias ksae='kubecfg --context=staging-azure-eastus --namespace=development'
+alias ksaea='kubecfg --context=staging-azure-eastus --namespace=accounts'
+alias ksaa='kubecfg --context=staging-azure-amsterdam --namespace=develompent'
+alias ksaaa='kubecfg --context=staging-azure-amsterdam --namespace=accounts'
 alias em='emacsclient -t --alternate-editor ""'
 
 if [[ -e ~/.zshrc_local ]]; then

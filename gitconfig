@@ -4,7 +4,7 @@
 	user = Miles Yucht
 	email = miles@databricks.com
 	excludesfile = /Users/miles/git/gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RFX
+#    pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
 	name = Miles Yucht
 	email = miles@databricks.com
