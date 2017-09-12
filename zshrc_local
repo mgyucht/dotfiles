@@ -1,3 +1,4 @@
+# -*- mode: shell-script -*-
 alias syncCerts='rsync -avz -r ~/.kube/certs ubuntu@miles.dev.databricks.com:/home/ubuntu/.kube'
 alias syncDotfiles='rsync -avz -r ~/dotfiles ubuntu@miles.dev.databricks.com:/home/ubuntu'
 

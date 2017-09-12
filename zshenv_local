@@ -1,3 +1,4 @@
+# -*- mode: shell-script -*-
 export AWS_HOSTNAME=miles.dev.databricks.com
 export AWS_UNIVERSE_DIR=databricks-devel/universe
 export UNIVERSE_HOME=$HOME/universe
