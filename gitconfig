@@ -1,24 +1,24 @@
 # This is Git's per-user configuration file.
 [core]
 # Please adapt and uncomment the following lines:
-	user = Miles Yucht
-	email = miles@databricks.com
-	excludesfile = /Users/miles/git/gitignore_global
-# pager = diff-so-fancy | less --tabs=4 -RFX
+        user = Miles Yucht
+        email = miles@databricks.com
+        excludesfile = /Users/miles/git/gitignore_global
+#    pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
-	name = Miles Yucht
-	email = miles@databricks.com
-#	signingkey = 4716ADB1109938AD
+        name = Miles Yucht
+        email = miles@databricks.com
+        signingkey = F43C36E227EDD419
 [push]
-	default = simple
+        default = simple
 [alias]
-	lol = log --decorate --graph --oneline
+        lol = log --decorate --graph --oneline
 [diff]
-	compactionHeuristic = true
+        compactionHeuristic = true
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+        oldNormal = red bold
+        oldHighlight = red bold 52
+        newNormal = green bold
+        newHighlight = green bold 22
 [commit]
-# gpgsign = true
+        gpgsign = true
