@@ -29,27 +29,24 @@ function setup_virtualenv() {
   source /usr/local/bin/virtualenvwrapper.sh
 }
 
+DOTFILES_DIR="$HOME/dotfiles"
+
 alias cdu="cd $UNIVERSE_HOME"
 alias cds="cd $SPARK_HOME"
-alias cdd="cd $HOME/dotfiles"
+alias cdd="cd $DOTFILES_DIR"
 alias tmuxcopy="tmux list-buffers | head -n1 | sed 's/^\([^:]*\).*/\1/' | xargs tmux show-buffer -b | pbcopy"
 
 unalias gcm &> /dev/null
 alias gcm='git commit -m'
-
 alias gcan='git commit --amend --no-edit'
-
 unalias gca &> /dev/null
 alias gca='git commit --amend'
-
 alias gdc='git diff --cached'
-
 alias gmbm='git merge-base HEAD master'
 alias gdm='git diff $(git merge-base HEAD master)'
 alias gdr='git diff $(git rev-parse --abbrev-ref --symbolic-full-name @{u})'
 alias gdp='git diff HEAD~'
 alias gpc='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpd='git push -u databricks $(git rev-parse --abbrev-ref HEAD)'
 
 gdb () {
   git diff $(git merge-base HEAD $1) $@
@@ -72,33 +69,11 @@ function update_kube_shard() {
 }
 
 alias k=kubecfg
-alias kd='kubecfg --context=dev --namespace=development'
-alias kdv='kubecfg --context=dev --namespace=vault'
-alias kdcv='kubecfg --context=dev --namespace=central-vault'
-alias kdd='kubecfg --context=dev --namespace=default'
-alias kda='kubecfg --context=dev --namespace=accounts'
-alias ks='kubecfg --context=staging --namespace=staging'
-alias ksv='kubecfg --context=staging --namespace=vault'
-alias kscv='kubecfg --context=staging --namespace=central-vault'
-alias ksd='kubecfg --context=staging --namespace=default'
-alias ksa='kubecfg --context=staging --namespace=accounts'
-alias kp='kubecfg --context=prod --namespace=production'
-alias kpv='kubecfg --context=prod --namespace=vault'
-alias kpcv='kubecfg --context=prod --namespace=central-vault'
-alias kpd='kubecfg --context=prod --namespace=default'
-alias kpa='kubecfg --context=prod --namespace=accounts'
-alias kdaw='kubecfg --context=dev-azure-westus --namespace=development'
-alias kdawa='kubecfg --context=dev-azure-westus --namespace=accounts'
-alias kdae='kubecfg --context=dev-azure-eastus --namespace=development'
-alias kdaea='kubecfg --context=dev-azure-eastus --namespace=accounts'
-alias kdaa='kubecfg --context=dev-azure-amsterdam --namespace=develompent'
-alias kdaaa='kubecfg --context=dev-azure-amsterdam --namespace=accounts'
-alias ksaw='kubecfg --context=staging-azure-westus --namespace=staging'
-alias ksawa='kubecfg --context=staging-azure-westus --namespace=accounts'
-alias ksae='kubecfg --context=staging-azure-eastus --namespace=staging'
-alias ksaea='kubecfg --context=staging-azure-eastus --namespace=accounts'
-alias ksaa='kubecfg --context=staging-azure-amsterdam --namespace=staging'
-alias ksaaa='kubecfg --context=staging-azure-amsterdam --namespace=accounts'
+if [[ "$DOTFILES_DIR/bin/generate-kubecfg-aliases.clj" -nt "$DOTFILES_DIR/autogen/kubecfg-aliases.sh" ]]; then
+    $DOTFILE_DIR/bin/generate-kubecfg-aliases.clj
+fi
+source $DOTFILES_DIR/autogen/kubecfg-aliases.sh
+
 alias em='emacsclient -t --alternate-editor ""'
 
 if [[ -e ~/.zshrc_local ]]; then
