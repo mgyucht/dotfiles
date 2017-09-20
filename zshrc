@@ -121,6 +121,11 @@ setup_project () {
     fi
 }
 
+remote-get-kube-access () {
+    echo "Please go to https://genie.dev.databricks.com/get_service_access?scope=$1"
+    ssh -L 8771:localhost:8771 ubuntu@miles.dev.databricks.com 'cd databricks-devel/universe; eng-tools/bin/get-kube-access --no-browser'
+}
+
 # Twig completion
 autoload -U bashcompinit
 bashcompinit
