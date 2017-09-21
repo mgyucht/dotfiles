@@ -44,9 +44,7 @@
 
 (defn get-context-and-namespace
   [cloud env region ns]
-  (let [context (case cloud
-                  :aws (name env)
-                  :azure (str (name env) "-" (name cloud) "-" region))]
+  (let [context (str (name env) "-" (name cloud) "-" region)]
     (str "--context=" (name context) " --namespace=" ns)))
 
 (def generate-mappings

@@ -70,7 +70,7 @@ function update_kube_shard() {
 
 alias k=kubecfg
 if [[ "$DOTFILES_DIR/bin/generate-kubecfg-aliases.clj" -nt "$DOTFILES_DIR/autogen/kubecfg-aliases.sh" ]]; then
-    $DOTFILE_DIR/bin/generate-kubecfg-aliases.clj
+    $DOTFILES_DIR/bin/generate-kubecfg-aliases.clj
 fi
 source $DOTFILES_DIR/autogen/kubecfg-aliases.sh
 
