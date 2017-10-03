@@ -8,7 +8,9 @@
   {"vault" "v"
    "central-vault" "cv"
    "default" "d"
-   "accounts" "a"})
+   "accounts" "a"
+   "jenkins-master" "jm"
+   "jenkins" "j"})
 (def azure-namespaces {"accounts" "a"})
 (def region-abbreviations
   {"westus" "wu"
@@ -19,9 +21,9 @@
   {:aws {:dev {:regions ["us-west-2"]}
          :staging {:regions ["us-west-2"]}
          :prod {:regions ["us-west-2"]}}
-   :azure {:dev {:regions ["westus", "eastus"]}
-           :staging {:regions ["westus"]}
-           :prod {:regions ["westus", "eastus2", "westeurope"]}}})
+   :azure {:dev {:regions ["westus" "eastus"]}
+           :staging {:regions ["westus" "eastus2"]}
+           :prod {:regions ["westus" "eastus2" "westeurope"]}}})
 
 (defn namespace-config
   [cloud env]
