@@ -43,6 +43,7 @@ values."
      emacs-lisp
      elm
      git
+     jsonnet
      lua
      markdown
      org
