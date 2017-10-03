@@ -38,6 +38,7 @@ values."
      ;; auto-completion
      better-defaults
      common-lisp
+     colors
      clojure
      emacs-lisp
      elm
@@ -124,8 +125,9 @@ values."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+   dotspacemacs-startup-lists '((recents . 7)
+                                (agenda . 3)
+                                (projects . 3))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -232,7 +234,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-at-startup t
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -271,13 +273,13 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -288,7 +290,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -343,6 +345,7 @@ layers configuration. You are free to put any user code."
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
+
   (with-eval-after-load 'web-mode
     (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
@@ -363,17 +366,12 @@ layers configuration. You are free to put any user code."
               (auto-fill-mode)
               (set-fill-column 100)
               (spacemacs/toggle-fill-column-indicator-on)))
-  (global-linum-mode)
-
-  ;; Use json-mode when editing jsonnet files
-  (add-to-list 'auto-mode-alist '("\\.jsonnet\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsonnet.TEMPLATE\\'" . json-mode))
-  ;; Set the indent of json files to 2
-  (setq json-reformat:indent-width 2)
 
   ;; Use python-mode when editing BUILD files
   (add-to-list 'auto-mode-alist '("BUILD\\'" . python-mode))
   (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
+  ;; Python indent should be 4
+  (setq python-indent 4)
 
   ;; Always add a newline
   (setq require-final-newline t)
@@ -381,19 +379,21 @@ layers configuration. You are free to put any user code."
   ;; Don't echo shell commands
   (setq comint-process-echoes t)
 
-  ;; Python indent should be 4
-  (setq python-indent 4)
-
-  (add-hook 'json-mode-hook
-            (lambda ()
-              (make-local-variable 'js-indent-level)
-              (setq js-indent-level 2)))
-
   ;; Don't ever require autocomplete
   (setq company-require-match nil)
 
   ;; kill frame on SPC q q
   (evil-leader/set-key "q q" 'spacemacs/frame-killer)
+
+  ;; Emacs lisp setup
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+
+  ;; Add local emacs configuration
+  (let ((local-spacemacs "~/.spacemacs.local"))
+    (if (not (file-exists-p local-spacemacs))
+        (message (str "Couldn't find local spacemacs file at " local-spacemacs))
+      (message "Loading local spacemacs file")
+      (load local-spacemacs)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -436,6 +436,7 @@ layers configuration. You are free to put any user code."
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(jsonnet-enable-debug-print t)
  '(magit-diff-use-overlays nil)
  '(nrepl-message-colors
    (quote
@@ -445,7 +446,7 @@ layers configuration. You are free to put any user code."
  '(org-tags-column -100)
  '(package-selected-packages
    (quote
-    (unfill slime alert log4e gntp markdown-mode skewer-mode simple-httpd json-snatcher json-reformat js2-mode haml-mode go-guru gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor company sbt-mode scala-mode multiple-cursors yasnippet seq inf-ruby anaconda-mode pythonic go-eldoc go-mode sql-indent tern zenburn-theme monokai-theme solarized-theme yaml-mode nginx-mode flycheck-elm elm-mode clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider queue clojure-mode yapfify xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slime-company slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rake rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file noflet neotree mwim multi-term move-text mmm-mode minitest markdown-toc magit-gitflow lua-mode lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help ensime enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump cython-mode company-web company-tern company-statistics company-anaconda common-lisp-snippets column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (rainbow-mode rainbow-identifiers color-identifiers-mode jsonnet-mode flycheck-package package-lint unfill slime alert log4e gntp markdown-mode skewer-mode simple-httpd json-snatcher json-reformat js2-mode haml-mode go-guru gitignore-mode pos-tip flycheck magit magit-popup git-commit with-editor company sbt-mode scala-mode multiple-cursors yasnippet seq inf-ruby anaconda-mode pythonic go-eldoc go-mode sql-indent tern zenburn-theme monokai-theme solarized-theme yaml-mode nginx-mode flycheck-elm elm-mode clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider queue clojure-mode yapfify xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit spacemacs-theme spaceline smeargle slime-company slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rake rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file noflet neotree mwim multi-term move-text mmm-mode minitest markdown-toc magit-gitflow lua-mode lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help ensime enh-ruby-mode emmet-mode elisp-slime-nav dumb-jump cython-mode company-web company-tern company-statistics company-anaconda common-lisp-snippets column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
