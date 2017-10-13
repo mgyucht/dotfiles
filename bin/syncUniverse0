@@ -1,0 +1,10 @@
+: "${UNIVERSE_HOME?Need to set UNIVERSE_HOME}"
+: "${AWS_USER?Need to set AWS_USER}"
+: "${AWS_HOSTNAME?Need to set AWS_HOSTNAME}"
+: "${AWS_UNIVERSE_DIR?Need to set AWS_UNIVERSE_DIR}"
+
+# rsync script which syncs the universe
+rsync -avzrl --delete -e 'ssh -o ControlPath="/tmp/%C"' --filter=':- .gitignore' \
+      --exclude '*/target/*' --exclude '.git/index.lock' --exclude 'port_database.db' \
+      --exclude '.ensime_cache' --exclude '.tern-port' --exclude 'bazel-testlogs' \
+      --exclude 'testlogs' --progress $UNIVERSE_HOME/. $AWS_USER@$AWS_HOSTNAME:$AWS_UNIVERSE_DIR

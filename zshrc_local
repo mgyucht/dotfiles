@@ -1,5 +1,7 @@
 # -*- mode: shell-script -*-
-alias syncCerts='rsync -avz -r ~/.kube/certs ubuntu@miles.dev.databricks.com:/home/ubuntu/.kube'
-alias syncDotfiles='rsync -avz -r ~/dotfiles ubuntu@miles.dev.databricks.com:/home/ubuntu'
+function syncCerts() {
+    rsync -avz ~/.kube/config ubuntu@miles.dev.databricks.com:/home/ubuntu/.kube
+    rsync -avz -r ~/.databricks/certs ubuntu@miles.dev.databricks.com:/home/ubuntu/.databricks
+}
 
 export PATH="$PATH:/Users/miles/bin:/Users/miles/universe/eng-tools/bin:/Users/miles/dotfiles/bin"

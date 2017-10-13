@@ -62,7 +62,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(jsonnet-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -192,7 +192,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts nil
+   dotspacemacs-auto-resume-layouts t
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -279,11 +279,11 @@ values."
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -391,9 +391,12 @@ layers configuration. You are free to put any user code."
   ;; Add local emacs configuration
   (let ((local-spacemacs "~/.spacemacs.local"))
     (if (not (file-exists-p local-spacemacs))
-        (message (str "Couldn't find local spacemacs file at " local-spacemacs))
+        (message (concat "Couldn't find local spacemacs file at " local-spacemacs))
       (message "Loading local spacemacs file")
       (load local-spacemacs)))
+
+  ;; Use jsonnet-mode when editing .jsonnet.TEMPLATE files
+  (add-to-list 'auto-mode-alist '("\\.jsonnet.TEMPLATE\\'" . jsonnet-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

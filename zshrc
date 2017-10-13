@@ -58,16 +58,6 @@ function gdn() {
   set +x
 }
 
-function kubecfg() {
-  UNIVERSE_DIR=$(git rev-parse --show-toplevel)
-  $UNIVERSE_DIR/bazel-bin/deployment/kubecfg/kubecfg $@
-}
-
-function update_kube_shard() {
-  UNIVERSE_DIR=$(git rev-parse --show-toplevel)
-  $UNIVERSE_DIR/bazel-bin/deployment/update/update_kube_shard $@
-}
-
 alias k=kubecfg
 if [[ "$DOTFILES_DIR/bin/generate-kubecfg-aliases.clj" -nt "$DOTFILES_DIR/autogen/kubecfg-aliases.sh" ]]; then
     $DOTFILES_DIR/bin/generate-kubecfg-aliases.clj
